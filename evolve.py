@@ -115,9 +115,3 @@ def evolve(times):
         sample = sorted(sample.items(), reverse=True)
 
         return sample
-
-
-stuff = evolve(1000)
-
-for i in stuff:
-        print i
