@@ -16,6 +16,8 @@ def tourny():
     #subset data to eliminate player name column and just have player strategy
     a=df.iloc[:,1:11]
 
+    print(df)
+
     #convert data set rows to a series of lists
     b=a.values.tolist()
 

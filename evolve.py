@@ -1,5 +1,8 @@
 import random
 import time
+from tourny import tourny
+import pandas as pd
+import csv
 
 sample = {}
 fitness = {}
@@ -48,11 +51,14 @@ for i in range(100):
 def getFitnessFromSample(myDict):
 	myFitness = {}
 	myFitnessList = []
+	postPandasFram
 	for i in myDict:
 		myFitness[myDict[i][9]] = myDict[i]
-		
-	myFitnessList = myFitness.items()
-	myFitness = dict(sorted(myFitnessList, reverse=True))
+
+
+	# to sort: waiting until done with csv loading
+	#myFitnessList = myFitness.items()
+	#myFitness = dict(sorted(myFitnessList, reverse=True))
 	
 	return myFitness
 
@@ -115,3 +121,5 @@ def evolve(times):
         sample = sorted(sample.items(), reverse=True)
 
         return sample
+
+print evolve(1000)

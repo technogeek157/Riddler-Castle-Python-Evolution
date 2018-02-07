@@ -1,4 +1,3 @@
-from tourny import tourny
 from evolve import evolve
 from pandas import DataFrame, read_csv
 import pandas as pd
