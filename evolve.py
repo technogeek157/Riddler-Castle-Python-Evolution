@@ -55,8 +55,6 @@ def getFitnessFromSample(myDict):
         originalCSV.head()
         originalCSV = originalCSV.iloc[:,1:11]
         originalList = []
-
-        toSave = 
         
         for i in originalCSV.values:
                 currentList = []
@@ -64,8 +62,9 @@ def getFitnessFromSample(myDict):
                         currentList.append(j)
                 originalList.append(currentList)
 
-        for i in originalList:
-                
+        toSave = pd.Series(originalList)
+
+        
         
         for i in myDict:
                 myFitness[myDict[i][9]] = myDict[i]
