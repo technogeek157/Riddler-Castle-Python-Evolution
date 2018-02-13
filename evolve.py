@@ -3,6 +3,7 @@ import time
 from tourny import tourny
 import pandas as pd
 import csv
+import pickle as pickle
 
 sample = {}
 fitness = {}
@@ -49,33 +50,30 @@ for i in range(100):
                 sample[i].append(10)
 
 def getFitnessFromSample(myDict):
+        toPickle = open('fitness.pickle', 'w')
         myFitness = {}
         myFitnessList = []
-        originalCSV = pd.read_csv("CastleCompetition_Original.csv")
-        originalCSV.head()
-        originalCSV = originalCSV.iloc[:,1:11]
-        originalList = []
-        
-        for i in originalCSV.values:
-                currentList = []
-                for j in i:
-                        currentList.append(j)
-                originalList.append(currentList)
-
-        toSave = pd.Series(originalList)
-
-        
-        
         for i in myDict:
-                myFitness[myDict[i][9]] = myDict[i]
+                myFitnessList.append(myDict[i])
 
+        pickle.dump(myFitnessList, toPickle)
+        toPickle.close()
 
-        # to sort: waiting until done with csv loading
-        #myFitnessList = myFitness.items()
-        #myFitness = dict(sorted(myFitnessList, reverse=True))
+        tourny()
+
+        returnedFitness = open('returnFitness.pickle', 'r')
+        f = pickle.load(returnedFitness)
+
+        for i in f:
+                myFitness[i[0][0]] = i[1]
+
+        print myFitness
         
-        return myFitness
+        myFitnessList = myFitness.items()
+        myFitness = dict(sorted(myFitnessList, reverse=True))
 
+        return myFitness
+        
 def eliminateBadOnes(myDict):
         myNewDict = myDict.items()
         myNewDict = dict(sorted(myNewDict))
@@ -136,4 +134,4 @@ def evolve(times, population):
 
         return sample
 
-evolve(1, 1)
+print evolve(100,10)

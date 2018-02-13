@@ -3,6 +3,7 @@ import itertools
 import os
 import csv
 import pandas as pd
+import pickle
 
 def tourny():
     #Set current working directory to your directory
@@ -25,6 +26,18 @@ def tourny():
     #Create a dictionary where the player name = key and the value is a list [[score],[tournament submission]]
     for i in range(len(df)):
         Team_Strategy[df['Player Name'][i]] = [[0],b[i]]
+
+    for i in Team_Strategy:
+        a = 1
+
+    myPickle = open('fitness.pickle', 'r')
+
+    f = pickle.load(myPickle)
+
+    count = -1
+    for i in f:
+        count += 1
+        Team_Strategy['evo' + str(count)] = [[0],i]
 
     #Creates a list of all players and then creates all the possible matchups
     Teams_Competing=Team_Strategy.keys()
@@ -72,6 +85,19 @@ def tourny():
         {'Player Name': Teams_Competing,
          'Final Score':final_score,
         })
+
+    fitnessList = []
+
+    for i in Team_Strategy:
+        if i[:3] == 'evo':
+            fitnessList.append(Team_Strategy[i])
+
+    for i in fitnessList:
+        print(i)
+
+    returnFitness = open('returnFitness.pickle', 'w')
+    pickle.dump(fitnessList, returnFitness)
+        
         
     # Join the initial dataframe (player names and their strategies) with the df_score dataframe
     df_final=pd.merge(df, df_score, on='Player Name')
