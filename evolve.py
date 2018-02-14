@@ -50,24 +50,25 @@ for i in range(100):
                 sample[i].append(10)
 
 def getFitnessFromSample(myDict):
-        toPickle = open('fitness.pickle', 'w')
         myFitness = {}
         myFitnessList = []
+        f = []
         for i in myDict:
+                myFitnessList = []
+                toPickle = open('fitness.pickle', 'w')
                 myFitnessList.append(myDict[i])
 
-        pickle.dump(myFitnessList, toPickle)
-        toPickle.close()
+                pickle.dump(myFitnessList, toPickle)
+                toPickle.close()
 
-        tourny()
+                tourny()
 
-        returnedFitness = open('returnFitness.pickle', 'r')
-        f = pickle.load(returnedFitness)
+                returnedFitness = open('returnFitness.pickle', 'r')
+                j = pickle.load(returnedFitness)
+                f.append(j[0])
 
         for i in f:
                 myFitness[i[0][0]] = i[1]
-
-        print myFitness
         
         myFitnessList = myFitness.items()
         myFitness = dict(sorted(myFitnessList, reverse=True))
@@ -76,17 +77,10 @@ def getFitnessFromSample(myDict):
         
 def eliminateBadOnes(myDict):
         myNewDict = myDict.items()
-        myNewDict = dict(sorted(myNewDict))
-        
-        myDict = myNewDict.items()
-        myDict = dict(myDict)
-        
-        count = 0
-        for i in myDict:
-                if count > 4:
-                        del myNewDict[i]
-                count += 1
-        return myNewDict
+        myNewDict = sorted(myNewDict, reverse=True)
+        stuff = myNewDict[0]
+        print stuff
+        return dict(myNewDict)
 
 def doOneRun(mySample, population):
         myFitness = getFitnessFromSample(mySample)

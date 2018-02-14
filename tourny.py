@@ -36,7 +36,6 @@ def tourny():
 
     count = -1
     for i in f:
-        count += 1
         Team_Strategy['evo' + str(count)] = [[0],i]
 
     #Creates a list of all players and then creates all the possible matchups
@@ -92,8 +91,6 @@ def tourny():
         if i[:3] == 'evo':
             fitnessList.append(Team_Strategy[i])
 
-    for i in fitnessList:
-        print(i)
 
     returnFitness = open('returnFitness.pickle', 'w')
     pickle.dump(fitnessList, returnFitness)
@@ -107,3 +104,5 @@ def tourny():
 
     # Save final dataframe as a csv file for later analysis
     df_final.to_csv('CastleCompetition_Post.csv')
+
+tourny()
