@@ -128,4 +128,4 @@ def evolve(times, population):
 
         return sample
 
-print evolve(100,10)
+print evolve(10000,10)

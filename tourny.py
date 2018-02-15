@@ -88,7 +88,7 @@ def tourny():
     fitnessList = []
 
     for i in Team_Strategy:
-        if i[:3] == 'evo':
+        if str(i)[:3] == 'evo':
             fitnessList.append(Team_Strategy[i])
 
 
